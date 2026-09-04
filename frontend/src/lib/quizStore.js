@@ -371,26 +371,204 @@ export const sampleQuizQuestions = {
   ]
 };
 
-// Generic fallback question generator guaranteeing 10 questions per quiz
-export const getQuestionsForQuiz = (quizId, quizTitle = "General Knowledge Quiz", questionCount = 10) => {
+// Generic fallback question generator guaranteeing questions per quiz
+// Smart question generator from custom text or topic
+export const generateSmartQuestionsFromText = (customText = "", quizTitle = "Custom Quiz", questionCount = 10) => {
+  const totalNeeded = questionCount || 10;
+  const cleanTitle = quizTitle.replace(/Practice Quiz|Quiz|Selected Materials/gi, "").trim() || "the selected topic";
+
+  // Try extracting sentences from customText
+  const rawSentences = (customText || "")
+    .split(/[.!?\n]+/)
+    .map(s => s.trim())
+    .filter(s => s.length > 20);
+
+  // If user provided rich custom text with multiple sentences/facts
+  if (rawSentences.length >= 2) {
+    return Array.from({ length: totalNeeded }).map((_, index) => {
+      const sentenceIndex = index % rawSentences.length;
+      const targetSentence = rawSentences[sentenceIndex];
+      const otherSentences = rawSentences.filter((_, i) => i !== sentenceIndex);
+
+      const snippet = targetSentence.length > 80 ? targetSentence.slice(0, 77) + "..." : targetSentence;
+      const correctOptIndex = index % 4;
+
+      const options = [];
+      const distractor1 = otherSentences[0]
+        ? `Incorrect statement: ${otherSentences[0].slice(0, 60)}...`
+        : `It contradicts the primary findings of ${cleanTitle}`;
+      const distractor2 = otherSentences[1]
+        ? `Opposite concept: ${otherSentences[1].slice(0, 60)}...`
+        : `It only applies in unverified edge cases`;
+      const distractor3 = `It is completely unrelated to ${cleanTitle}`;
+
+      const distractors = [distractor1, distractor2, distractor3];
+
+      for (let i = 0; i < 4; i++) {
+        if (i === correctOptIndex) {
+          options.push(targetSentence);
+        } else {
+          options.push(distractors.pop() || `Alternative rule ${i + 1} regarding ${cleanTitle}`);
+        }
+      }
+
+      return {
+        id: `custom_q_${Date.now()}_${index + 1}`,
+        question: `Question ${index + 1}: Which statement correctly accurately reflects the text regarding "${snippet}"?`,
+        options,
+        correctAnswer: correctOptIndex,
+        explanation: `According to your text: "${targetSentence}".`
+      };
+    });
+  }
+
+  // Topic-focused questions with distinct templates for each question index
+  const questionTemplates = [
+    {
+      q: `What is the primary definition and main purpose of ${cleanTitle}?`,
+      opts: [
+        `Core concepts and fundamental mechanisms governing ${cleanTitle}`,
+        `An obsolete framework superseded by legacy methods`,
+        `A secondary background process with no direct functional impact`,
+        `An unverified theoretical concept without practical application`
+      ],
+      correct: 0,
+      exp: `${cleanTitle} centers on core concepts and fundamental mechanisms in this domain.`
+    },
+    {
+      q: `Which key component or feature is most essential to ${cleanTitle}?`,
+      opts: [
+        `Static hardcoded parameters without configurability`,
+        `Key operational structures and modular components of ${cleanTitle}`,
+        `Random uncalibrated data processing rules`,
+        `Manual external data overrides`
+      ],
+      correct: 1,
+      exp: `Key operational structures and modular components are essential to ${cleanTitle}.`
+    },
+    {
+      q: `What is a major practical advantage of utilizing ${cleanTitle}?`,
+      opts: [
+        `Increases execution overhead significantly`,
+        `Requires continuous manual intervention`,
+        `Improved efficiency, structured execution, and scalable workflow`,
+        `Eliminates all error handling requirements`
+      ],
+      correct: 2,
+      exp: `Improved efficiency, structured execution, and scalability are primary benefits of ${cleanTitle}.`
+    },
+    {
+      q: `Which scenario represents the most appropriate application for ${cleanTitle}?`,
+      opts: [
+        `When structured analysis, clear rules, and systematic processing are required`,
+        `Only when offline without digital connectivity`,
+        `When performance speed is entirely irrelevant`,
+        `Exclusively in temporary emergency rollbacks`
+      ],
+      correct: 0,
+      exp: `${cleanTitle} is best suited for structured analysis and systematic processing.`
+    },
+    {
+      q: `What critical best practice should be followed when working with ${cleanTitle}?`,
+      opts: [
+        `Bypass standard verification checks`,
+        `Maintain clear structure, validate input data, and monitor performance`,
+        `Avoid documenting configuration choices`,
+        `Hardcode all variable inputs into single files`
+      ],
+      correct: 1,
+      exp: `Maintaining clear structure, data validation, and monitoring are vital best practices for ${cleanTitle}.`
+    },
+    {
+      q: `How does ${cleanTitle} handle state management and execution flow?`,
+      opts: [
+        `By executing arbitrary uncontrolled state changes`,
+        `By ignoring system feedback loops`,
+        `Through structured control flow, deterministic state transitions, and validation`,
+        `By relying exclusively on global mutable singletons`
+      ],
+      correct: 2,
+      exp: `${cleanTitle} uses structured control flow and deterministic state transitions.`
+    },
+    {
+      q: `Which common misconception is often associated with ${cleanTitle}?`,
+      opts: [
+        `Assuming ${cleanTitle} eliminates the need for proper design and understanding`,
+        `Recognizing that ${cleanTitle} requires structured implementation`,
+        `Understanding that ${cleanTitle} improves process clarity`,
+        `Expecting ${cleanTitle} to produce deterministic outputs`
+      ],
+      correct: 0,
+      exp: `A common misconception is assuming ${cleanTitle} replaces proper foundational design.`
+    },
+    {
+      q: `What distinguishes ${cleanTitle} from traditional standard methods?`,
+      opts: [
+        `It operates with higher resource consumption`,
+        `Enhanced modularity, intelligent structure, and targeted feature set`,
+        `It strictly disables modern tooling integration`,
+        `It lacks standardized documentation`
+      ],
+      correct: 1,
+      exp: `${cleanTitle} stands out due to enhanced modularity and targeted feature capabilities.`
+    },
+    {
+      q: `Which metric or indicator best measures success when evaluating ${cleanTitle}?`,
+      opts: [
+        `High error frequency during execution`,
+        `Decreased output accuracy`,
+        `Consistent accuracy, low processing latency, and high completion rate`,
+        `Total line count of configuration scripts`
+      ],
+      correct: 2,
+      exp: `Accuracy, low latency, and completion rate measure success for ${cleanTitle}.`
+    },
+    {
+      q: `What is the expected long-term outcome of properly integrating ${cleanTitle}?`,
+      opts: [
+        `Sustainable process optimization, higher accuracy, and comprehensive mastery`,
+        `Frequent application crashes and state corruption`,
+        `Complete dependency on legacy third-party tools`,
+        `Unpredictable random output behavior`
+      ],
+      correct: 0,
+      exp: `Proper integration of ${cleanTitle} leads to sustainable optimization and mastery.`
+    }
+  ];
+
+  return Array.from({ length: totalNeeded }).map((_, index) => {
+    const tpl = questionTemplates[index % questionTemplates.length];
+    return {
+      id: `smart_q_${Date.now()}_${index + 1}`,
+      question: `Question ${index + 1}: ${tpl.q}`,
+      options: [...tpl.opts],
+      correctAnswer: tpl.correct,
+      explanation: tpl.exp
+    };
+  });
+};
+
+// Generic fallback question generator guaranteeing questions per quiz
+export const getQuestionsForQuiz = (quizId, quizTitle = "General Knowledge Quiz", questionCount = 10, customText = "") => {
+  // Check if questions exist in localStorage
+  try {
+    const customQuestionsRaw = localStorage.getItem(`eduvisio_questions_${quizId}`);
+    if (customQuestionsRaw) {
+      const parsed = JSON.parse(customQuestionsRaw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
+      }
+    }
+  } catch (e) {
+    console.error("Error reading saved questions for quiz", quizId, e);
+  }
+
   if (sampleQuizQuestions[quizId]) {
     return sampleQuizQuestions[quizId];
   }
 
-  // Generate 10 dynamic questions matching the title
-  const totalNeeded = 10;
-  return Array.from({ length: totalNeeded }).map((_, index) => ({
-    id: `dynamic_${quizId}_${index + 1}`,
-    question: `Question ${index + 1} of 10: What is a fundamental rule regarding ${quizTitle}?`,
-    options: [
-      `Core principle A regarding ${quizTitle}`,
-      `Core principle B regarding ${quizTitle}`,
-      `Core principle C regarding ${quizTitle}`,
-      `Core principle D regarding ${quizTitle}`
-    ],
-    correctAnswer: index % 4,
-    explanation: `Option ${String.fromCharCode(65 + (index % 4))} is the authoritative correct answer for ${quizTitle}.`
-  }));
+  // Generate dynamic, unique questions matching the custom text / title
+  return generateSmartQuestionsFromText(customText, quizTitle, questionCount);
 };
 
 // LocalStorage Persistence Helpers
@@ -432,3 +610,21 @@ export const saveQuizResult = (quizId, resultData) => {
     console.error("Failed to save quiz result", e);
   }
 };
+
+export const saveGeneratedQuiz = (quizMeta, questions) => {
+  try {
+    // Save metadata into eduvisio_user_quizzes
+    const userQuizzesRaw = localStorage.getItem("eduvisio_user_quizzes");
+    let userQuizzes = userQuizzesRaw ? JSON.parse(userQuizzesRaw) : [];
+    userQuizzes = [quizMeta, ...userQuizzes.filter(q => q.id !== quizMeta.id)];
+    localStorage.setItem("eduvisio_user_quizzes", JSON.stringify(userQuizzes));
+
+    // Save questions into eduvisio_questions_{id}
+    localStorage.setItem(`eduvisio_questions_${quizMeta.id}`, JSON.stringify(questions));
+    return quizMeta;
+  } catch (e) {
+    console.error("Failed to save generated quiz", e);
+    throw e;
+  }
+};
+

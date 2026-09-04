@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
 import { FileText, Video, File, Music, Search, Plus, Filter, FolderPlus, MoreVertical, Play, Edit, Trash2, Download, Share } from "lucide-react";
-const Materials = () => {
+
+export const Materials = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [activeTab, setActiveTab] = useState("all");
     const [materials, setMaterials] = useState([
@@ -116,7 +117,7 @@ const Materials = () => {
         </div>
         <div className="mt-4 md:mt-0 flex space-x-2">
           <Link to="/upload">
-            <Button>
+            <Button className="bg-[#10bc00] hover:bg-[#0b7c00] text-white">
               <Plus className="h-4 w-4 mr-2"/>
               Upload New
             </Button>
@@ -260,7 +261,7 @@ const Materials = () => {
                     : `You don't have any ${activeTab} materials yet.`}
                     </p>
                     <Link to="/upload">
-                      <Button>
+                      <Button className="bg-[#10bc00] hover:bg-[#0b7c00] text-white">
                         <Plus className="h-4 w-4 mr-2"/>
                         Upload Materials
                       </Button>
@@ -300,4 +301,5 @@ const Materials = () => {
       </div>
     </div>);
 };
+
 export default Materials;

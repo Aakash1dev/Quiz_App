@@ -30,15 +30,18 @@ const Header = ({ toggleSidebar }) => {
                     <Bell className="h-5 w-5"/>
                     <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
                 </Button>
-                <Link to="/profile" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+                <Link to="/profile" className="flex items-center space-x-2.5 hover:opacity-80 transition-opacity">
                     <Avatar className="h-8 w-8 cursor-pointer">
                         <AvatarImage src=""/>
-                        <AvatarFallback className="bg-brand-100 text-brand-700">
+                        <AvatarFallback className="bg-[#10bc00]/10 text-[#0b7c00] font-bold">
                             {user?.name?.slice(0, 2).toUpperCase() || 'U'}
                         </AvatarFallback>
                     </Avatar>
-                    <div className="hidden md:block">
-                        <p className="text-sm font-medium">{user?.name || 'User'}</p>
+                    <div className="hidden md:block text-left leading-tight">
+                        <p className="text-xs font-bold text-slate-800">{user?.name || 'User'}</p>
+                        <p className="text-[10px] text-slate-500 font-medium">
+                          {user?.role === 'admin' ? '🛡️ Admin Account' : '🎓 Learner Account'}
+                        </p>
                     </div>
                 </Link>
             </div>

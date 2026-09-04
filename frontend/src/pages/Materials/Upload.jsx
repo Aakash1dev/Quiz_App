@@ -9,7 +9,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useToast } from "@/components/ui/use-toast";
 import { UploadCloud, Link2, AlertCircle, FileUp, File, X, Check } from "lucide-react";
-const Upload = () => {
+
+export const Upload = () => {
     const [files, setFiles] = useState([]);
     const [urls, setUrls] = useState([]);
     const [newUrl, setNewUrl] = useState("");
@@ -81,7 +82,6 @@ const Upload = () => {
             return;
         }
         setIsUploading(true);
-        // Simulate upload progress for each file
         files.forEach((file, index) => {
             let progress = 0;
             const interval = setInterval(() => {
@@ -89,7 +89,6 @@ const Upload = () => {
                 if (progress > 100) {
                     progress = 100;
                     clearInterval(interval);
-                    // Check if all files completed
                     const allCompleted = Object.values({
                         ...uploadProgress,
                         [file.name]: progress,
@@ -115,7 +114,6 @@ const Upload = () => {
                 }));
             }, 300);
         });
-        // If no files but only URLs, simulate completion
         if (files.length === 0 && urls.length > 0) {
             setTimeout(() => {
                 setIsUploading(false);
@@ -189,7 +187,7 @@ const Upload = () => {
                     <h3 className="text-lg font-medium">Drag and drop your files</h3>
                     <p className="text-sm text-muted-foreground">
                       or{" "}
-                      <button className="text-brand-600 hover:text-brand-700 font-medium" onClick={() => fileInputRef.current?.click()}>
+                      <button className="text-[#10bc00] hover:text-[#0b7c00] font-medium" onClick={() => fileInputRef.current?.click()}>
                         browse
                       </button>{" "}
                       to upload
@@ -235,7 +233,7 @@ const Upload = () => {
                   <div className="flex-1">
                     <Input type="url" placeholder="Enter URL to learning resource (e.g., YouTube video, article)" value={newUrl} onChange={(e) => setNewUrl(e.target.value)}/>
                   </div>
-                  <Button onClick={addUrl} type="button">
+                  <Button onClick={addUrl} type="button" className="bg-[#10bc00] hover:bg-[#0b7c00] text-white">
                     Add URL
                   </Button>
                 </div>
@@ -291,7 +289,7 @@ const Upload = () => {
 
           <div className="mt-6 flex justify-end space-x-2">
             <Button variant="outline">Cancel</Button>
-            <Button onClick={uploadFiles} disabled={isUploading}>
+            <Button onClick={uploadFiles} disabled={isUploading} className="bg-[#10bc00] hover:bg-[#0b7c00] text-white">
               {isUploading ? ("Uploading...") : (<>
                   <FileUp className="h-4 w-4 mr-2"/>
                   Upload Materials
@@ -302,4 +300,5 @@ const Upload = () => {
       </Card>
     </div>);
 };
+
 export default Upload;
