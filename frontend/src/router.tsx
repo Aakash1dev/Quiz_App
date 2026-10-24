@@ -113,15 +113,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "/user-management",
-        element: withSuspense(UserManagement),
+        element: (
+          <ProtectedRoute requireAdmin={true}>
+            {withSuspense(UserManagement)}
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/admin/notifications",
-        element: withSuspense(AdminNotifications),
+        element: (
+          <ProtectedRoute requireAdmin={true}>
+            {withSuspense(AdminNotifications)}
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/notifications",
-        element: withSuspense(AdminNotifications),
+        element: (
+          <ProtectedRoute requireAdmin={true}>
+            {withSuspense(AdminNotifications)}
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/profile",

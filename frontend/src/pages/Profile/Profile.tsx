@@ -3,36 +3,44 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/components/ui/use-toast";
-import { User, Bell, Sliders, Brain, Save, Trophy, BookOpen, Clock, ShieldCheck, Mail, Sparkles } from "lucide-react";
+import { User, Bell, Sliders, Brain, Save, Trophy, BookOpen, Clock, ShieldCheck, Mail, Sparkles, Users, Activity } from "lucide-react";
+import { getAdminUsers } from "@/lib/adminStore";
 
 export const Profile = () => {
   const { toast } = useToast();
-  const [user, setUser] = useState({ name: "", email: "" });
+  const [user, setUser] = useState<any>({ name: "", email: "", role: "user" });
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [userCount, setUserCount] = useState(5);
 
-  const [darkMode, setDarkMode] = useState(false);
-  const [emailNotifications, setEmailNotifications] = useState(true);
-  const [quizReminders, setQuizReminders] = useState(true);
   const [defaultDifficulty, setDefaultDifficulty] = useState("medium");
   const [defaultQuestionCount, setDefaultQuestionCount] = useState("10");
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      const parsed = JSON.parse(storedUser);
-      setUser(parsed);
-      setName(parsed.name || "");
-      setEmail(parsed.email || "");
+      try {
+        const parsed = JSON.parse(storedUser);
+        setUser(parsed);
+        setName(parsed.name || "");
+        setEmail(parsed.email || "");
+        setIsAdmin(parsed.role === "admin");
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    const adminUsers = getAdminUsers();
+    if (adminUsers?.length) {
+      setUserCount(adminUsers.length);
     }
   }, []);
 
-  const handleSaveProfile = (e) => {
+  const handleSaveProfile = (e: React.FormEvent) => {
     e.preventDefault();
     const updatedUser = { ...user, name, email };
     localStorage.setItem("user", JSON.stringify(updatedUser));
@@ -46,77 +54,128 @@ export const Profile = () => {
   const handleSavePreferences = () => {
     toast({
       title: "Preferences saved",
-      description: "Your study and app settings have been updated.",
+      description: "Your default preferences have been updated.",
     });
   };
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto pb-10">
-      <Card className="bg-gradient-to-r from-[#10bc00] to-[#0b7c00] text-white overflow-hidden shadow-lg border-0">
+    <div className={`space-y-6 max-w-5xl mx-auto pb-10 ${isAdmin ? "admin-theme" : ""}`}>
+      {/* Dynamic Profile Header Card */}
+      <Card
+        className={`text-white overflow-hidden shadow-lg border-0 transition-all ${
+          isAdmin
+            ? "bg-gradient-to-r from-[#f97316] to-[#ea580c]"
+            : "bg-gradient-to-r from-[#10bc00] to-[#0b7c00]"
+        }`}
+      >
         <CardContent className="p-6 md:p-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex flex-col md:flex-row items-center gap-5 text-center md:text-left">
               <Avatar className="h-24 w-24 border-4 border-white/20 shadow-md">
                 <AvatarImage src="" />
-                <AvatarFallback className="bg-white text-[#0b7c00] text-3xl font-bold">
-                  {name?.slice(0, 2).toUpperCase() || "U"}
+                <AvatarFallback
+                  className={`bg-white text-3xl font-bold ${
+                    isAdmin ? "text-[#ea580c]" : "text-[#0b7c00]"
+                  }`}
+                >
+                  {name?.slice(0, 2).toUpperCase() || (isAdmin ? "AD" : "U")}
                 </AvatarFallback>
               </Avatar>
               <div>
-                <h1 className="text-2xl md:text-3xl font-bold">{name || "Learner"}</h1>
+                <h1 className="text-2xl md:text-3xl font-bold">
+                  {name || (isAdmin ? "System Administrator" : "Learner")}
+                </h1>
                 <p className="text-white/80 flex items-center justify-center md:justify-start gap-1.5 mt-1 text-sm">
                   <Mail className="h-4 w-4 opacity-80" />
-                  {email || "user@example.com"}
+                  {email || (isAdmin ? "admin@eduvisio.com" : "user@example.com")}
                 </p>
                 <div className="flex items-center justify-center md:justify-start gap-2 mt-3">
                   <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
-                    <Sparkles className="h-3.5 w-3.5 text-yellow-300" /> Pro Student
+                    {isAdmin ? (
+                      <>
+                        <ShieldCheck className="h-3.5 w-3.5 text-amber-200" /> Platform Administrator
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="h-3.5 w-3.5 text-yellow-300" /> {user?.tier || "Pro Student"}
+                      </>
+                    )}
                   </span>
                   <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
-                    <ShieldCheck className="h-3.5 w-3.5 text-green-200" /> Account Verified
+                    <ShieldCheck className="h-3.5 w-3.5 text-white/90" />
+                    {isAdmin ? "Admin Security Clearance" : "Account Verified"}
                   </span>
                 </div>
               </div>
             </div>
 
+            {/* Dynamic Metrics */}
             <div className="grid grid-cols-3 gap-4 bg-white/10 backdrop-blur-sm p-4 rounded-xl text-center border border-white/10 w-full md:w-auto">
-              <div>
-                <div className="flex justify-center mb-1">
-                  <BookOpen className="h-5 w-5 text-emerald-100" />
-                </div>
-                <p className="text-xl font-bold">12</p>
-                <p className="text-xs text-emerald-100">Materials</p>
-              </div>
-              <div>
-                <div className="flex justify-center mb-1">
-                  <Trophy className="h-5 w-5 text-yellow-300" />
-                </div>
-                <p className="text-xl font-bold">85%</p>
-                <p className="text-xs text-emerald-100">Avg Score</p>
-              </div>
-              <div>
-                <div className="flex justify-center mb-1">
-                  <Clock className="h-5 w-5 text-emerald-100" />
-                </div>
-                <p className="text-xl font-bold">24h</p>
-                <p className="text-xs text-emerald-100">Study Time</p>
-              </div>
+              {isAdmin ? (
+                <>
+                  <div>
+                    <div className="flex justify-center mb-1">
+                      <Users className="h-5 w-5 text-orange-100" />
+                    </div>
+                    <p className="text-xl font-bold">{userCount}</p>
+                    <p className="text-xs text-orange-100">Users</p>
+                  </div>
+                  <div>
+                    <div className="flex justify-center mb-1">
+                      <Activity className="h-5 w-5 text-amber-200" />
+                    </div>
+                    <p className="text-xl font-bold">99.8%</p>
+                    <p className="text-xs text-orange-100">Uptime</p>
+                  </div>
+                  <div>
+                    <div className="flex justify-center mb-1">
+                      <ShieldCheck className="h-5 w-5 text-orange-100" />
+                    </div>
+                    <p className="text-xl font-bold">Active</p>
+                    <p className="text-xs text-orange-100">Controls</p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <div className="flex justify-center mb-1">
+                      <BookOpen className="h-5 w-5 text-emerald-100" />
+                    </div>
+                    <p className="text-xl font-bold">12</p>
+                    <p className="text-xs text-emerald-100">Materials</p>
+                  </div>
+                  <div>
+                    <div className="flex justify-center mb-1">
+                      <Trophy className="h-5 w-5 text-yellow-300" />
+                    </div>
+                    <p className="text-xl font-bold">85%</p>
+                    <p className="text-xs text-emerald-100">Avg Score</p>
+                  </div>
+                  <div>
+                    <div className="flex justify-center mb-1">
+                      <Clock className="h-5 w-5 text-emerald-100" />
+                    </div>
+                    <p className="text-xl font-bold">24h</p>
+                    <p className="text-xs text-emerald-100">Study Time</p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </CardContent>
       </Card>
 
       <Tabs defaultValue="account" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 md:w-auto md:inline-flex">
-          <TabsTrigger value="account" className="flex items-center gap-2">
+        <TabsList className="grid w-full grid-cols-3 md:w-auto md:inline-flex bg-white border border-slate-200">
+          <TabsTrigger value="account" className="flex items-center gap-2 text-xs">
             <User className="h-4 w-4" />
             Account Details
           </TabsTrigger>
-          <TabsTrigger value="preferences" className="flex items-center gap-2">
+          <TabsTrigger value="preferences" className="flex items-center gap-2 text-xs">
             <Sliders className="h-4 w-4" />
-            Study Preferences
+            Preferences
           </TabsTrigger>
-          <TabsTrigger value="notifications" className="flex items-center gap-2">
+          <TabsTrigger value="notifications" className="flex items-center gap-2 text-xs">
             <Bell className="h-4 w-4" />
             Notifications
           </TabsTrigger>
@@ -126,7 +185,11 @@ export const Profile = () => {
           <Card>
             <CardHeader>
               <CardTitle>Personal Information</CardTitle>
-              <CardDescription>Manage your name, email, and personal profile information.</CardDescription>
+              <CardDescription>
+                {isAdmin
+                  ? "Manage your administrator identity and communication email."
+                  : "Manage your name, email, and personal student profile."}
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSaveProfile} className="space-y-6">
@@ -155,7 +218,14 @@ export const Profile = () => {
                 </div>
 
                 <div className="flex justify-end">
-                  <Button type="submit" className="bg-[#10bc00] hover:bg-[#0b7c00] text-white">
+                  <Button
+                    type="submit"
+                    className={`text-white font-semibold transition-all shadow-sm ${
+                      isAdmin
+                        ? "bg-[#f97316] hover:bg-[#ea580c]"
+                        : "bg-[#10bc00] hover:bg-[#0b7c00]"
+                    }`}
+                  >
                     <Save className="h-4 w-4 mr-2" />
                     Save Profile
                   </Button>
@@ -169,10 +239,10 @@ export const Profile = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Brain className="h-5 w-5 text-[#10bc00]" />
+                <Brain className={`h-5 w-5 ${isAdmin ? "text-[#f97316]" : "text-[#10bc00]"}`} />
                 AI Quiz Generation Defaults
               </CardTitle>
-              <CardDescription>Customize your default options for generated quizzes and interface theme.</CardDescription>
+              <CardDescription>Customize your default options for generated quizzes and learning modules.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
@@ -206,7 +276,14 @@ export const Profile = () => {
               </div>
 
               <div className="flex justify-end pt-2">
-                <Button onClick={handleSavePreferences} className="bg-[#10bc00] hover:bg-[#0b7c00] text-white">
+                <Button
+                  onClick={handleSavePreferences}
+                  className={`text-white font-semibold transition-all shadow-sm ${
+                    isAdmin
+                      ? "bg-[#f97316] hover:bg-[#ea580c]"
+                      : "bg-[#10bc00] hover:bg-[#0b7c00]"
+                  }`}
+                >
                   <Save className="h-4 w-4 mr-2" />
                   Save Preferences
                 </Button>

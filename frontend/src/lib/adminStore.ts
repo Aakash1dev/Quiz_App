@@ -59,11 +59,11 @@ export const deleteSupportCategory = (categoryName) => {
 
 // 2. ADMIN USERS MANAGEMENT
 const DEFAULT_USERS = [
-  { id: "u1", name: "Aakash Sharma", email: "admin@eduvisio.com", role: "Super Admin", tier: "Elite Scholar", status: "active", quizzesCount: 42, joinedDate: "2026-01-10", lastLogin: "Just now", location: "New Delhi, India", phone: "+91 98765 43210" },
-  { id: "u2", name: "Rohan Verma", email: "rohan@gmail.com", role: "Instructor", tier: "Pro Student", status: "active", quizzesCount: 19, joinedDate: "2026-02-14", lastLogin: "2 hours ago", location: "Mumbai, India", phone: "+91 98123 45678" },
-  { id: "u3", name: "Priya Patel", email: "priya@student.edu", role: "Student", tier: "Pro Student", status: "active", quizzesCount: 28, joinedDate: "2026-03-01", lastLogin: "Yesterday", location: "Ahmedabad, India", phone: "+91 97234 56789" },
-  { id: "u4", name: "David Miller", email: "david@university.edu", role: "Student", tier: "Free Learner", status: "active", quizzesCount: 14, joinedDate: "2026-04-12", lastLogin: "3 days ago", location: "California, USA", phone: "+1 415 555 0192" },
-  { id: "u5", name: "Guest User", email: "user@eduvisio.com", role: "Student", tier: "Free Learner", status: "active", quizzesCount: 5, joinedDate: "2026-08-01", lastLogin: "Just now", location: "London, UK", phone: "+44 20 7946 0912" },
+  { id: "u1", name: "Aakash Sharma", email: "admin@eduvisio.com", role: "admin", tier: "Elite Scholar", status: "active", quizzesCount: 42, joinedDate: "2026-01-10", lastLogin: "Just now", location: "New Delhi, India", phone: "+91 98765 43210" },
+  { id: "u2", name: "Rohan Verma", email: "rohan@gmail.com", role: "user", tier: "Pro Student", status: "active", quizzesCount: 19, joinedDate: "2026-02-14", lastLogin: "2 hours ago", location: "Mumbai, India", phone: "+91 98123 45678" },
+  { id: "u3", name: "Priya Patel", email: "priya@student.edu", role: "user", tier: "Pro Student", status: "active", quizzesCount: 28, joinedDate: "2026-03-01", lastLogin: "Yesterday", location: "Ahmedabad, India", phone: "+91 97234 56789" },
+  { id: "u4", name: "David Miller", email: "david@university.edu", role: "user", tier: "Free Learner", status: "active", quizzesCount: 14, joinedDate: "2026-04-12", lastLogin: "3 days ago", location: "California, USA", phone: "+1 415 555 0192" },
+  { id: "u5", name: "Guest User", email: "user@eduvisio.com", role: "user", tier: "Free Learner", status: "active", quizzesCount: 5, joinedDate: "2026-08-01", lastLogin: "Just now", location: "London, UK", phone: "+44 20 7946 0912" },
 ];
 
 export const getAdminUsers = () => {

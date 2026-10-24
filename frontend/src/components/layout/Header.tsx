@@ -165,7 +165,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
                 <Link to="/profile" className="flex items-center space-x-2.5 hover:opacity-80 transition-opacity">
                     <Avatar className="h-8 w-8 cursor-pointer">
                         <AvatarImage src=""/>
-                        <AvatarFallback className="bg-[#10bc00]/10 text-[#0b7c00] font-bold">
+                        <AvatarFallback className={user?.role === 'admin' ? "bg-orange-100 text-[#ea580c] font-bold" : "bg-[#10bc00]/10 text-[#0b7c00] font-bold"}>
                             {user?.name?.slice(0, 2).toUpperCase() || 'U'}
                         </AvatarFallback>
                     </Avatar>

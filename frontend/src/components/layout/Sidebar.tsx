@@ -47,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, toggleSidebar }) => {
         }
     }, [location.pathname]);
 
-    const isAdmin = user?.role === "admin" || user?.role === "superadmin" || user?.email?.includes("admin");
+    const isAdmin = user?.role === "admin";
 
     const sidebarItems = [
         {
@@ -55,14 +55,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, toggleSidebar }) => {
             icon: Home,
             href: "/dashboard",
         },
-        {
-            title: "Notifications",
-            icon: Bell,
-            href: "/admin/notifications",
-            badge: unreadCount > 0 ? unreadCount : null,
-            badgeColor: "bg-[#f97316]",
-        },
         ...(isAdmin ? [
+            {
+                title: "Admin Alerts",
+                icon: Bell,
+                href: "/admin/notifications",
+                badge: unreadCount > 0 ? unreadCount : null,
+                badgeColor: "bg-[#f97316]",
+            },
             {
                 title: "User Directory",
                 icon: Users,
@@ -127,13 +127,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, toggleSidebar }) => {
                 <div className="flex items-center mb-6 justify-between">
                     {!isCollapsed && (
                         <NavLink to="/dashboard" className="flex items-center space-x-2">
-                            <BrainCircuit className="h-8 w-8 text-[#10bc00]"/>
+                            <BrainCircuit className={cn("h-8 w-8", isAdmin ? "text-[#f97316]" : "text-[#10bc00]")}/>
                             <span className="text-xl font-bold text-slate-900">EduVisio</span>
                         </NavLink>
                     )}
                     {isCollapsed && (
                         <NavLink to="/dashboard" className="flex justify-center w-full">
-                            <BrainCircuit className="h-8 w-8 text-[#10bc00]"/>
+                            <BrainCircuit className={cn("h-8 w-8", isAdmin ? "text-[#f97316]" : "text-[#10bc00]")}/>
                         </NavLink>
                     )}
                 </div>
@@ -148,7 +148,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, toggleSidebar }) => {
                                         "flex items-center w-full rounded-md text-sm font-medium transition-colors p-2.5",
                                         isCollapsed ? "justify-center" : "justify-start",
                                         isActive
-                                            ? "bg-[#10bc00] text-white hover:bg-[#0b7c00]"
+                                            ? (isAdmin
+                                                ? "bg-[#f97316] text-white hover:bg-[#ea580c]"
+                                                : "bg-[#10bc00] text-white hover:bg-[#0b7c00]")
                                             : "text-gray-700 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                                     )
                                 }

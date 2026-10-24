@@ -6,6 +6,7 @@ import Header from "./Header";
 const AppLayout: React.FC = () => {
     const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -14,6 +15,12 @@ const AppLayout: React.FC = () => {
             navigate("/login");
         } else {
             setIsAuthenticated(true);
+            try {
+                const u = JSON.parse(user);
+                setIsAdmin(u.role === "admin");
+            } catch {
+                setIsAdmin(false);
+            }
         }
     }, [navigate]);
 
@@ -26,7 +33,7 @@ const AppLayout: React.FC = () => {
     }
 
     return (
-        <div className="flex h-screen overflow-hidden">
+        <div className={`flex h-screen overflow-hidden ${isAdmin ? "admin-theme" : ""}`}>
             <Sidebar isCollapsed={isCollapsed} toggleSidebar={toggleSidebar}/>
             <div className="flex flex-col flex-1 overflow-hidden">
                 <Header toggleSidebar={toggleSidebar}/>

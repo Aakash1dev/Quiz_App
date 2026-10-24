@@ -21,7 +21,7 @@ export const Faq = () => {
 
   const storedUser = localStorage.getItem("user");
   const parsedUser = storedUser ? JSON.parse(storedUser) : null;
-  const isAdmin = parsedUser?.role === "admin" || parsedUser?.email?.includes("admin");
+  const isAdmin = parsedUser?.role === "admin";
 
   const [faqList, setFaqList] = useState([]);
 

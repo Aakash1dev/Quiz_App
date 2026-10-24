@@ -56,7 +56,7 @@ export const UserManagement = () => {
   const [isAddUserOpen, setIsAddUserOpen] = useState(false);
   const [newUserName, setNewUserName] = useState("");
   const [newUserEmail, setNewUserEmail] = useState("");
-  const [newUserRole, setNewUserRole] = useState("Student");
+  const [newUserRole, setNewUserRole] = useState("user");
   const [newUserTier, setNewUserTier] = useState("Free Learner");
   const [newUserLocation, setNewUserLocation] = useState("India");
 
@@ -199,9 +199,8 @@ export const UserManagement = () => {
                 className="w-full h-9 rounded-md border border-slate-200 bg-white px-3 text-xs font-medium"
               >
                 <option value="all">All Roles</option>
-                <option value="student">Student</option>
-                <option value="instructor">Instructor</option>
-                <option value="super admin">Super Admin</option>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
               </select>
             </div>
 
@@ -269,14 +268,12 @@ export const UserManagement = () => {
                     <td className="py-3 px-4">
                       <Badge
                         className={
-                          u.role === "Super Admin" || u.role === "admin"
+                          u.role === "admin"
                             ? "bg-[#f97316] text-white"
-                            : u.role === "Instructor"
-                            ? "bg-purple-600 text-white"
-                            : "bg-slate-200 text-slate-700"
+                            : "bg-[#10bc00] text-white"
                         }
                       >
-                        {u.role}
+                        {u.role.toUpperCase()}
                       </Badge>
                     </td>
                     <td className="py-3 px-4 font-medium text-slate-800">
@@ -421,9 +418,8 @@ export const UserManagement = () => {
               <div className="space-y-1">
                 <Label htmlFor="nu-role">Assigned Role</Label>
                 <select id="nu-role" value={newUserRole} onChange={(e) => setNewUserRole(e.target.value)} className="w-full h-9 rounded-md border border-slate-200 bg-white px-3 text-xs font-medium">
-                  <option value="Student">Student</option>
-                  <option value="Instructor">Instructor</option>
-                  <option value="Super Admin">Super Admin</option>
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
                 </select>
               </div>
 

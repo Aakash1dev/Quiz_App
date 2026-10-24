@@ -38,7 +38,7 @@ const RegisterForm = () => {
     }, 900);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !email.trim() || !password) return;
 
@@ -49,6 +49,53 @@ const RegisterForm = () => {
         variant: "destructive",
       });
       return;
+    }
+
+    setIsLoading(true);
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          password,
+          role: "user", // Strictly 'user'
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setIsLoading(false);
+        const userObj = {
+          id: data._id,
+          name: data.name,
+          email: data.email,
+          role: data.role || "user",
+          token: data.token,
+          tier: data.tier || "Free Learner",
+        };
+        localStorage.setItem("user", JSON.stringify(userObj));
+        toast({
+          title: "Registration Successful!",
+          description: `Welcome to EduVisio, ${userObj.name}!`,
+        });
+        navigate("/dashboard");
+        return;
+      } else {
+        const err = await response.json().catch(() => ({}));
+        if (response.status === 400) {
+          setIsLoading(false);
+          toast({
+            title: "Registration Failed",
+            description: err.message || "Email is already registered",
+            variant: "destructive",
+          });
+          return;
+        }
+      }
+    } catch {
+      // Offline fallback
     }
 
     handleRegisterProcess(name.trim(), email.trim(), "Email");

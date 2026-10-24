@@ -14,7 +14,7 @@ export const Support = () => {
   const { toast } = useToast();
   const storedUser = localStorage.getItem("user");
   const parsedUser = storedUser ? JSON.parse(storedUser) : null;
-  const isAdmin = parsedUser?.role === "admin" || parsedUser?.email?.includes("admin");
+  const isAdmin = parsedUser?.role === "admin";
 
   const [activeTab, setActiveTab] = useState(isAdmin ? "admin-desk" : "my-tickets");
 

@@ -1,6 +1,6 @@
 // Centralized TypeScript Type Definitions for Quiz_App
 
-export type UserRole = "student" | "instructor" | "admin" | "superadmin" | "Super Admin" | "Student" | "Instructor";
+export type UserRole = "user" | "admin";
 
 export type SubscriptionTier = "Free Learner" | "Pro Student" | "Elite Scholar" | "Institution / Team";
 
@@ -8,7 +8,7 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  role: string;
+  role: UserRole;
   tier?: string;
   status?: "active" | "suspended";
   quizzesCount?: number;
