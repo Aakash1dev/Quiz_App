@@ -84,7 +84,7 @@ export const UserManagement = () => {
     setIsAddUserOpen(false);
     toast({
       title: "🎉 Account Created!",
-      description: `New user "${newUserName}" added to EduVisio system.`,
+      description: `New user "${newUserName}" added to Quizo system.`,
     });
   };
 
@@ -125,7 +125,7 @@ export const UserManagement = () => {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `EduVisio_Users_Report_${new Date().toISOString().split("T")[0]}.csv`;
+    a.download = `Quizo_Users_Report_${new Date().toISOString().split("T")[0]}.csv`;
     a.click();
 
     toast({
@@ -285,9 +285,8 @@ export const UserManagement = () => {
                     <td className="py-3 px-4 text-center font-bold text-slate-900">{u.quizzesCount}</td>
                     <td className="py-3 px-4">
                       <span
-                        className={`inline-flex items-center text-[10px] font-bold rounded-full px-2.5 py-0.5 ${
-                          u.status === "active" ? "text-emerald-700 bg-emerald-100" : "text-red-700 bg-red-100"
-                        }`}
+                        className={`inline-flex items-center text-[10px] font-bold rounded-full px-2.5 py-0.5 ${u.status === "active" ? "text-emerald-700 bg-emerald-100" : "text-red-700 bg-red-100"
+                          }`}
                       >
                         {u.status}
                       </span>

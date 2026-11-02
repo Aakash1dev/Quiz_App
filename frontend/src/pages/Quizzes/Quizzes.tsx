@@ -86,7 +86,7 @@ export const Quizzes = () => {
 
     useEffect(() => {
         const savedResults = getSavedResults();
-        const userQuizzesRaw = localStorage.getItem("eduvisio_user_quizzes");
+        const userQuizzesRaw = localStorage.getItem("Quizo_user_quizzes");
         let combinedQuizzes = [...quizzes];
         if (userQuizzesRaw) {
             try {
@@ -128,12 +128,12 @@ export const Quizzes = () => {
         const filtered = quizzes.filter((quiz) => quiz.id !== id);
         setQuizzes(filtered);
         try {
-            const userQuizzesRaw = localStorage.getItem("eduvisio_user_quizzes");
+            const userQuizzesRaw = localStorage.getItem("Quizo_user_quizzes");
             if (userQuizzesRaw) {
                 const userQuizzes = JSON.parse(userQuizzesRaw).filter((q) => q.id !== id);
-                localStorage.setItem("eduvisio_user_quizzes", JSON.stringify(userQuizzes));
+                localStorage.setItem("Quizo_user_quizzes", JSON.stringify(userQuizzes));
             }
-            localStorage.removeItem(`eduvisio_questions_${id}`);
+            localStorage.removeItem(`Quizo_questions_${id}`);
         } catch (e) {
             console.error("Failed to update localStorage on delete", e);
         }
@@ -159,21 +159,21 @@ export const Quizzes = () => {
             case "material":
                 return (
                     <Badge variant="outline" className="bg-green-50 text-green-600 border-green-200">
-                        <FileText className="h-3 w-3 mr-1"/>
+                        <FileText className="h-3 w-3 mr-1" />
                         From Materials
                     </Badge>
                 );
             case "custom":
                 return (
                     <Badge variant="outline" className="bg-blue-50 text-blue-600 border-blue-200">
-                        <Edit className="h-3 w-3 mr-1"/>
+                        <Edit className="h-3 w-3 mr-1" />
                         Custom Created
                     </Badge>
                 );
             case "ai":
                 return (
                     <Badge variant="outline" className="bg-purple-50 text-purple-600 border-purple-200">
-                        <Brain className="h-3 w-3 mr-1"/>
+                        <Brain className="h-3 w-3 mr-1" />
                         AI Generated
                     </Badge>
                 );
@@ -230,7 +230,7 @@ export const Quizzes = () => {
                 <div className="mt-4 md:mt-0 flex space-x-2">
                     <Link to="/generate-quiz">
                         <Button className="bg-[#10bc00] hover:bg-[#0b7c00] text-white">
-                            <Brain className="h-4 w-4 mr-2"/>
+                            <Brain className="h-4 w-4 mr-2" />
                             Generate New Quiz
                         </Button>
                     </Link>
@@ -239,7 +239,7 @@ export const Quizzes = () => {
 
             <div className="flex flex-col md:flex-row gap-4 mb-6">
                 <div className="relative flex-1">
-                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500"/>
+                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
                     <Input
                         type="search"
                         placeholder="Search quizzes..."

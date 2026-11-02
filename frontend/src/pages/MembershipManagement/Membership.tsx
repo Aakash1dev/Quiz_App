@@ -50,7 +50,7 @@ export const Membership = () => {
             <Crown className="h-3.5 w-3.5 mr-1" /> MEMBERSHIP &amp; TIERS
           </Badge>
           <h1 className="text-3xl font-extrabold tracking-tight mb-2">
-            Supercharge Your Learning with EduVisio Pro
+            Supercharge Your Learning with Quizo Pro
           </h1>
           <p className="text-white/90 text-sm md:text-base leading-relaxed">
             Unlock unlimited AI quiz generation, advanced analytics, custom study material exports, and priority AI processing.
@@ -71,11 +71,10 @@ export const Membership = () => {
           return (
             <Card
               key={plan.id}
-              className={`relative flex flex-col justify-between transition-all ${
-                plan.popular
+              className={`relative flex flex-col justify-between transition-all ${plan.popular
                   ? "border-[#10bc00] shadow-md ring-2 ring-[#10bc00]/20"
                   : "border-slate-200"
-              }`}
+                }`}
             >
               {plan.popular && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#10bc00] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-0.5 rounded-full shadow-sm">
@@ -105,13 +104,12 @@ export const Membership = () => {
                 <Button
                   onClick={() => handleSelectPlan(plan)}
                   disabled={isCurrent}
-                  className={`w-full text-xs font-semibold h-9 ${
-                    isCurrent
+                  className={`w-full text-xs font-semibold h-9 ${isCurrent
                       ? "bg-slate-100 text-slate-500 border border-slate-200 cursor-default"
                       : plan.popular
-                      ? "bg-[#10bc00] hover:bg-[#0b7c00] text-white shadow-sm"
-                      : "bg-slate-900 hover:bg-slate-800 text-white"
-                  }`}
+                        ? "bg-[#10bc00] hover:bg-[#0b7c00] text-white shadow-sm"
+                        : "bg-slate-900 hover:bg-slate-800 text-white"
+                    }`}
                 >
                   {isCurrent ? "Active Plan" : plan.buttonText}
                 </Button>

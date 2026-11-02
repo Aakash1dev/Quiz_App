@@ -280,7 +280,7 @@ export function AdminDashboard() {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900 leading-tight">
-                EduVisio Dynamic Admin Control Panel
+                Quizo Dynamic Admin Control Panel
               </h1>
               <Badge className="bg-[#f97316] text-white text-[10px] uppercase font-bold tracking-wider px-2 py-0.5">
                 SUPERADMIN
@@ -459,8 +459,8 @@ export function AdminDashboard() {
                               user.role === "Super Admin" || user.role === "admin"
                                 ? "bg-[#f97316] text-white"
                                 : user.role === "Instructor"
-                                ? "bg-purple-600 text-white"
-                                : "bg-slate-200 text-slate-700"
+                                  ? "bg-purple-600 text-white"
+                                  : "bg-slate-200 text-slate-700"
                             }
                           >
                             {user.role}
@@ -469,9 +469,8 @@ export function AdminDashboard() {
                         <td className="py-3 px-4 text-center font-bold text-slate-800">{user.quizzesCount}</td>
                         <td className="py-3 px-4">
                           <span
-                            className={`inline-flex items-center text-[10px] font-bold rounded-full px-2 py-0.5 ${
-                              user.status === "active" ? "text-emerald-700 bg-emerald-100" : "text-red-700 bg-red-100"
-                            }`}
+                            className={`inline-flex items-center text-[10px] font-bold rounded-full px-2 py-0.5 ${user.status === "active" ? "text-emerald-700 bg-emerald-100" : "text-red-700 bg-red-100"
+                              }`}
                           >
                             {user.status}
                           </span>
@@ -645,11 +644,10 @@ export function AdminDashboard() {
                       key={key}
                       type="button"
                       onClick={() => setSelectedUserTheme(key)}
-                      className={`p-3 rounded-xl border text-left flex items-center justify-between transition-all ${
-                        selectedUserTheme === key
+                      className={`p-3 rounded-xl border text-left flex items-center justify-between transition-all ${selectedUserTheme === key
                           ? "border-[#10bc00] bg-emerald-50/50 shadow-sm ring-2 ring-[#10bc00]"
                           : "border-slate-200 hover:border-slate-300"
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center gap-2.5">
                         <span className="h-5 w-5 rounded-full border shadow-sm shrink-0" style={{ backgroundColor: item.primary }} />
@@ -665,7 +663,7 @@ export function AdminDashboard() {
                   <p className="font-bold text-slate-700 text-[11px] uppercase tracking-wider">User Dashboard Live Preview</p>
                   <div className="p-3 bg-white rounded-lg border shadow-xs flex justify-between items-center">
                     <span className="font-extrabold text-xs" style={{ color: THEMES.USER[selectedUserTheme]?.primary }}>
-                      🎓 EduVisio User Portal
+                      🎓 Quizo User Portal
                     </span>
                     <button
                       type="button"
@@ -694,11 +692,10 @@ export function AdminDashboard() {
                       key={key}
                       type="button"
                       onClick={() => setSelectedAdminTheme(key)}
-                      className={`p-3 rounded-xl border text-left flex items-center justify-between transition-all ${
-                        selectedAdminTheme === key
+                      className={`p-3 rounded-xl border text-left flex items-center justify-between transition-all ${selectedAdminTheme === key
                           ? "border-[#f97316] bg-orange-50/50 shadow-sm ring-2 ring-[#f97316]"
                           : "border-slate-200 hover:border-slate-300"
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center gap-2.5">
                         <span className="h-5 w-5 rounded-full border shadow-sm shrink-0" style={{ backgroundColor: item.primary }} />
@@ -714,7 +711,7 @@ export function AdminDashboard() {
                   <p className="font-bold text-slate-700 text-[11px] uppercase tracking-wider">Admin Control Panel Live Preview</p>
                   <div className="p-3 bg-white rounded-lg border shadow-xs flex justify-between items-center">
                     <span className="font-extrabold text-xs" style={{ color: THEMES.ADMIN[selectedAdminTheme]?.primary }}>
-                      🛡️ EduVisio Admin
+                      🛡️ Quizo Admin
                     </span>
                     <button
                       type="button"

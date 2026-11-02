@@ -32,7 +32,7 @@ const RegisterForm = () => {
       localStorage.setItem("user", JSON.stringify(userObj));
       toast({
         title: "🎉 Registration Successful!",
-        description: `Welcome to EduVisio, ${userObj.name}! Account created via ${provider}.`,
+        description: `Welcome to Quizo, ${userObj.name}! Account created via ${provider}.`,
       });
       navigate("/dashboard");
     }, 900);
@@ -78,7 +78,7 @@ const RegisterForm = () => {
         localStorage.setItem("user", JSON.stringify(userObj));
         toast({
           title: "Registration Successful!",
-          description: `Welcome to EduVisio, ${userObj.name}!`,
+          description: `Welcome to Quizo, ${userObj.name}!`,
         });
         navigate("/dashboard");
         return;
@@ -124,7 +124,7 @@ const RegisterForm = () => {
           Create Account
         </CardTitle>
         <CardDescription className="text-xs text-slate-500">
-          Start your personalized AI learning journey with EduVisio
+          Start your personalized AI learning journey with Quizo
         </CardDescription>
       </CardHeader>
 

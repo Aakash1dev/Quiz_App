@@ -62,11 +62,10 @@ export const Profile = () => {
     <div className={`space-y-6 max-w-5xl mx-auto pb-10 ${isAdmin ? "admin-theme" : ""}`}>
       {/* Dynamic Profile Header Card */}
       <Card
-        className={`text-white overflow-hidden shadow-lg border-0 transition-all ${
-          isAdmin
+        className={`text-white overflow-hidden shadow-lg border-0 transition-all ${isAdmin
             ? "bg-gradient-to-r from-[#f97316] to-[#ea580c]"
             : "bg-gradient-to-r from-[#10bc00] to-[#0b7c00]"
-        }`}
+          }`}
       >
         <CardContent className="p-6 md:p-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -74,9 +73,8 @@ export const Profile = () => {
               <Avatar className="h-24 w-24 border-4 border-white/20 shadow-md">
                 <AvatarImage src="" />
                 <AvatarFallback
-                  className={`bg-white text-3xl font-bold ${
-                    isAdmin ? "text-[#ea580c]" : "text-[#0b7c00]"
-                  }`}
+                  className={`bg-white text-3xl font-bold ${isAdmin ? "text-[#ea580c]" : "text-[#0b7c00]"
+                    }`}
                 >
                   {name?.slice(0, 2).toUpperCase() || (isAdmin ? "AD" : "U")}
                 </AvatarFallback>
@@ -87,7 +85,7 @@ export const Profile = () => {
                 </h1>
                 <p className="text-white/80 flex items-center justify-center md:justify-start gap-1.5 mt-1 text-sm">
                   <Mail className="h-4 w-4 opacity-80" />
-                  {email || (isAdmin ? "admin@eduvisio.com" : "user@example.com")}
+                  {email || (isAdmin ? "admin@Quizo.com" : "user@example.com")}
                 </p>
                 <div className="flex items-center justify-center md:justify-start gap-2 mt-3">
                   <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
@@ -220,11 +218,10 @@ export const Profile = () => {
                 <div className="flex justify-end">
                   <Button
                     type="submit"
-                    className={`text-white font-semibold transition-all shadow-sm ${
-                      isAdmin
+                    className={`text-white font-semibold transition-all shadow-sm ${isAdmin
                         ? "bg-[#f97316] hover:bg-[#ea580c]"
                         : "bg-[#10bc00] hover:bg-[#0b7c00]"
-                    }`}
+                      }`}
                   >
                     <Save className="h-4 w-4 mr-2" />
                     Save Profile
@@ -278,11 +275,10 @@ export const Profile = () => {
               <div className="flex justify-end pt-2">
                 <Button
                   onClick={handleSavePreferences}
-                  className={`text-white font-semibold transition-all shadow-sm ${
-                    isAdmin
+                  className={`text-white font-semibold transition-all shadow-sm ${isAdmin
                       ? "bg-[#f97316] hover:bg-[#ea580c]"
                       : "bg-[#10bc00] hover:bg-[#0b7c00]"
-                  }`}
+                    }`}
                 >
                   <Save className="h-4 w-4 mr-2" />
                   Save Preferences

@@ -40,7 +40,7 @@ export function UserDashboard() {
     }
 
     // Load recent quizzes from localStorage if available
-    const userQuizzesRaw = localStorage.getItem("eduvisio_user_quizzes");
+    const userQuizzesRaw = localStorage.getItem("Quizo_user_quizzes");
     if (userQuizzesRaw) {
       try {
         const qList = JSON.parse(userQuizzesRaw);

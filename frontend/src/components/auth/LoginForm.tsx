@@ -100,7 +100,7 @@ const LoginForm = () => {
           </div>
         </div>
         <CardTitle className="text-2xl font-extrabold tracking-tight text-slate-900">
-          Welcome to EduVisio
+          Welcome to Quizo
         </CardTitle>
         <CardDescription className="text-xs text-slate-500">
           Sign in to your learning studio or administration panel
@@ -116,7 +116,7 @@ const LoginForm = () => {
             <Input
               id="email"
               type="email"
-              placeholder="e.g. admin@eduvisio.com or user@gmail.com"
+              placeholder="e.g. admin@Quizo.com or user@gmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="h-10 bg-slate-50 border-slate-200 text-xs focus:bg-white transition-all"

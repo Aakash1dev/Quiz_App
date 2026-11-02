@@ -1,4 +1,4 @@
-# EduVisio — AI-Powered Quiz & Learning Platform 
+# Quizo — AI-Powered Quiz & Learning Platform 
 
 A full-stack, intelligent learning platform engineered to transform passive study materials into interactive, AI-driven assessments, structured knowledge repositories, and actionable performance insights.
 
@@ -6,9 +6,9 @@ A full-stack, intelligent learning platform engineered to transform passive stud
 
 ##  Project Motive
 
-Traditional learning often relies on passive reading and highlighting, which research shows results in rapid knowledge decay and low retention. **EduVisio** was built around the principle of **Active Recall and Spaced Assessment**.
+Traditional learning often relies on passive reading and highlighting, which research shows results in rapid knowledge decay and low retention. **Quizo** was built around the principle of **Active Recall and Spaced Assessment**.
 
-The core motive of EduVisio is to:
+The core motive of Quizo is to:
 - **Democratize High-Quality Self-Testing**: Allow any student or educator to instantly turn raw study notes, lecture summaries, or documents into comprehensive practice quizzes.
 - **Provide Actionable Feedback**: Move beyond simple score numbers by providing instant question-level explanations and concept-level mastery tracking.
 - **Empower Both Learners and Educators**: Provide a tailored experience where students focus on skill mastery while administrators maintain platform health and user management.
@@ -17,7 +17,7 @@ The core motive of EduVisio is to:
 
 ##  The Problem It Solves
 
-| Challenge in Traditional Study | How EduVisio Solves It |
+| Challenge in Traditional Study | How Quizo Solves It |
 | :--- | :--- |
 | **Passive Consumption Trap**<br>Students read through dozens of pages without actively testing their comprehension. | **Instant Active Recall**<br>Automatically generates multi-format quizzes with countdown timers, flagging, and immediate answer explanations. |
 | **Manual Quiz Creation Overhead**<br>Formulating questions, distractors, and rationales by hand takes hours of effort. | **AI-Powered Quiz Generation**<br>Leverages Google Gemini AI to analyze uploaded study materials and construct tailored assessments in seconds. |
@@ -28,7 +28,7 @@ The core motive of EduVisio is to:
 
 ##  Role-Based Architecture
 
-EduVisio implements a strict two-role system with dedicated environments:
+Quizo implements a strict two-role system with dedicated environments:
 
 -  **Learner (`user`)**:
   - Upload and organize personal learning materials (PDFs, notes, docs).

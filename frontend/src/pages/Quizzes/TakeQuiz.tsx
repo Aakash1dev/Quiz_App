@@ -42,7 +42,7 @@ export const TakeQuiz = () => {
   const [showPalette, setShowPalette] = useState(false);
 
   useEffect(() => {
-    const storedQuizzesRaw = localStorage.getItem("eduvisio_user_quizzes");
+    const storedQuizzesRaw = localStorage.getItem("Quizo_user_quizzes");
     let quizTitle = "Interactive Practice Quiz";
     if (storedQuizzesRaw) {
       try {
@@ -168,8 +168,8 @@ export const TakeQuiz = () => {
               {scoreResult.score >= 80
                 ? "Outstanding job! You've mastered this topic."
                 : scoreResult.score >= 60
-                ? "Good effort! Review the explanations below to improve."
-                : "Keep practicing! Review incorrect answers below."}
+                  ? "Good effort! Review the explanations below to improve."
+                  : "Keep practicing! Review incorrect answers below."}
             </p>
 
             <div className="pt-4 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
@@ -232,13 +232,12 @@ export const TakeQuiz = () => {
             return (
               <Card
                 key={q.id}
-                className={`border-l-4 transition-all shadow-sm ${
-                  isCorrect
+                className={`border-l-4 transition-all shadow-sm ${isCorrect
                     ? "border-l-green-500 bg-green-50/20"
                     : isUnanswered
-                    ? "border-l-amber-500 bg-amber-50/20"
-                    : "border-l-red-500 bg-red-50/20"
-                }`}
+                      ? "border-l-amber-500 bg-amber-50/20"
+                      : "border-l-red-500 bg-red-50/20"
+                  }`}
               >
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between gap-4">
@@ -324,11 +323,10 @@ export const TakeQuiz = () => {
             <div
               key={idx}
               onClick={() => handleSelectOption(currentQ.id, idx)}
-              className={`p-3.5 rounded-xl border cursor-pointer flex items-center gap-3 transition-all ${
-                userAnswers[currentQ.id] === idx
+              className={`p-3.5 rounded-xl border cursor-pointer flex items-center gap-3 transition-all ${userAnswers[currentQ.id] === idx
                   ? "border-[#10bc00] bg-emerald-50 text-emerald-900 font-bold"
                   : "border-slate-200 hover:border-slate-300"
-              }`}
+                }`}
             >
               <span className="w-6 h-6 rounded-full bg-slate-100 border text-center text-xs flex items-center justify-center font-bold">
                 {String.fromCharCode(65 + idx)}

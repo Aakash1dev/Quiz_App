@@ -13,7 +13,7 @@ export const Login = () => {
     }
     const params = new URLSearchParams(location.search);
     if (params.get("guest") === "true") {
-      localStorage.setItem("user", JSON.stringify({ email: "guest@eduvisio.com", name: "Guest User", role: "user" }));
+      localStorage.setItem("user", JSON.stringify({ email: "guest@Quizo.com", name: "Guest User", role: "user" }));
       navigate("/dashboard");
     }
   }, [location, navigate]);

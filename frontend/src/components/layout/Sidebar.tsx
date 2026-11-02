@@ -4,22 +4,22 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import {
-  BookOpen,
-  BarChart3,
-  BrainCircuit,
-  FileUp,
-  Home,
-  Library,
-  LogOut,
-  User,
-  Brain,
-  Crown,
-  HelpCircle,
-  LifeBuoy,
-  MessageSquare,
-  Bell,
-  Users,
-  ShieldCheck
+    BookOpen,
+    BarChart3,
+    BrainCircuit,
+    FileUp,
+    Home,
+    Library,
+    LogOut,
+    User,
+    Brain,
+    Crown,
+    HelpCircle,
+    LifeBuoy,
+    MessageSquare,
+    Bell,
+    Users,
+    ShieldCheck
 } from "lucide-react";
 import { getAdminNotifications } from "@/lib/adminStore";
 
@@ -127,13 +127,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, toggleSidebar }) => {
                 <div className="flex items-center mb-6 justify-between">
                     {!isCollapsed && (
                         <NavLink to="/dashboard" className="flex items-center space-x-2">
-                            <BrainCircuit className={cn("h-8 w-8", isAdmin ? "text-[#f97316]" : "text-[#10bc00]")}/>
-                            <span className="text-xl font-bold text-slate-900">EduVisio</span>
+                            <BrainCircuit className={cn("h-8 w-8", isAdmin ? "text-[#f97316]" : "text-[#10bc00]")} />
+                            <span className="text-xl font-bold text-slate-900">Quizo</span>
                         </NavLink>
                     )}
                     {isCollapsed && (
                         <NavLink to="/dashboard" className="flex justify-center w-full">
-                            <BrainCircuit className={cn("h-8 w-8", isAdmin ? "text-[#f97316]" : "text-[#10bc00]")}/>
+                            <BrainCircuit className={cn("h-8 w-8", isAdmin ? "text-[#f97316]" : "text-[#10bc00]")} />
                         </NavLink>
                     )}
                 </div>
@@ -156,7 +156,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, toggleSidebar }) => {
                                 }
                             >
                                 <div className="relative flex items-center">
-                                    <item.icon className={cn("h-5 w-5", isCollapsed ? "" : "mr-2")}/>
+                                    <item.icon className={cn("h-5 w-5", isCollapsed ? "" : "mr-2")} />
                                     {isCollapsed && item.badge && (
                                         <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#f97316] rounded-full animate-pulse" />
                                     )}

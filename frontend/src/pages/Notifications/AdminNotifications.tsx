@@ -190,8 +190,8 @@ export const AdminNotifications = () => {
         audienceCategory: composeAudience.toLowerCase().includes("student")
           ? "student"
           : composeAudience.toLowerCase().includes("admin")
-          ? "admin"
-          : "all",
+            ? "admin"
+            : "all",
         channel: composeChannel,
         audienceCount: count,
         readCount: 0,
@@ -242,7 +242,7 @@ export const AdminNotifications = () => {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `EduVisio_Notifications_Log_${new Date().toISOString().split("T")[0]}.csv`;
+    a.download = `Quizo_Notifications_Log_${new Date().toISOString().split("T")[0]}.csv`;
     a.click();
 
     toast({
@@ -264,10 +264,10 @@ export const AdminNotifications = () => {
       statusFilter === "all"
         ? true
         : statusFilter === "unread"
-        ? !item.isRead
-        : statusFilter === "pinned"
-        ? item.pinned
-        : item.status === statusFilter;
+          ? !item.isRead
+          : statusFilter === "pinned"
+            ? item.pinned
+            : item.status === statusFilter;
 
     return matchesSearch && matchesType && matchesPriority && matchesStatus;
   });
@@ -612,25 +612,23 @@ export const AdminNotifications = () => {
                     setSelectedNotif(notif);
                     setIsDetailOpen(true);
                   }}
-                  className={`group relative bg-white border rounded-xl p-4 sm:p-5 transition-all cursor-pointer hover:shadow-md ${
-                    notif.pinned
+                  className={`group relative bg-white border rounded-xl p-4 sm:p-5 transition-all cursor-pointer hover:shadow-md ${notif.pinned
                       ? "border-amber-300 bg-amber-50/20"
                       : !notif.isRead
-                      ? "border-[#f97316]/40 bg-orange-50/10 shadow-sm"
-                      : "border-slate-200 hover:border-slate-300"
-                  }`}
+                        ? "border-[#f97316]/40 bg-orange-50/10 shadow-sm"
+                        : "border-slate-200 hover:border-slate-300"
+                    }`}
                 >
                   {/* Left accent bar */}
                   <div
-                    className={`absolute left-0 top-3 bottom-3 w-1.5 rounded-r-md ${
-                      notif.priority === "urgent"
+                    className={`absolute left-0 top-3 bottom-3 w-1.5 rounded-r-md ${notif.priority === "urgent"
                         ? "bg-red-500"
                         : notif.priority === "high"
-                        ? "bg-[#f97316]"
-                        : notif.priority === "normal"
-                        ? "bg-blue-500"
-                        : "bg-slate-300"
-                    }`}
+                          ? "bg-[#f97316]"
+                          : notif.priority === "normal"
+                            ? "bg-blue-500"
+                            : "bg-slate-300"
+                      }`}
                   />
 
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 pl-2">
@@ -720,11 +718,10 @@ export const AdminNotifications = () => {
                         size="icon"
                         onClick={(e) => handleTogglePin(notif.id, e)}
                         title={notif.pinned ? "Unpin notification" : "Pin notification"}
-                        className={`h-8 w-8 ${
-                          notif.pinned
+                        className={`h-8 w-8 ${notif.pinned
                             ? "text-amber-600 hover:text-amber-700 bg-amber-50"
                             : "text-slate-400 hover:text-slate-700"
-                        }`}
+                          }`}
                       >
                         {notif.pinned ? <PinOff className="h-4 w-4" /> : <Pin className="h-4 w-4" />}
                       </Button>
@@ -734,9 +731,8 @@ export const AdminNotifications = () => {
                         size="icon"
                         onClick={(e) => handleToggleRead(notif.id, e)}
                         title={notif.isRead ? "Mark as unread" : "Mark as read"}
-                        className={`h-8 w-8 ${
-                          !notif.isRead ? "text-[#f97316] hover:bg-orange-50" : "text-slate-400 hover:text-slate-700"
-                        }`}
+                        className={`h-8 w-8 ${!notif.isRead ? "text-[#f97316] hover:bg-orange-50" : "text-slate-400 hover:text-slate-700"
+                          }`}
                       >
                         <CheckCircle2 className="h-4 w-4" />
                       </Button>
@@ -900,22 +896,20 @@ export const AdminNotifications = () => {
                           <button
                             type="button"
                             onClick={() => setComposeScheduleType("now")}
-                            className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
-                              composeScheduleType === "now"
+                            className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${composeScheduleType === "now"
                                 ? "bg-[#f97316] text-white shadow-sm"
                                 : "text-slate-600 hover:text-slate-900"
-                            }`}
+                              }`}
                           >
                             Send Now
                           </button>
                           <button
                             type="button"
                             onClick={() => setComposeScheduleType("schedule")}
-                            className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
-                              composeScheduleType === "schedule"
+                            className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${composeScheduleType === "schedule"
                                 ? "bg-[#f97316] text-white shadow-sm"
                                 : "text-slate-600 hover:text-slate-900"
-                            }`}
+                              }`}
                           >
                             Schedule
                           </button>
@@ -1029,7 +1023,7 @@ export const AdminNotifications = () => {
                             <p className="font-bold text-slate-900 text-xs leading-snug">
                               {composeTitle || "Notification Headline"}
                             </p>
-                            <p className="text-[10px] text-slate-400">Just now • EduVisio System Ops</p>
+                            <p className="text-[10px] text-slate-400">Just now • Quizo System Ops</p>
                           </div>
                         </div>
                         {getPriorityBadge(composePriority)}
@@ -1076,10 +1070,10 @@ export const AdminNotifications = () => {
                         {composeAudience.includes("Students")
                           ? "940 Learners"
                           : composeAudience.includes("Instructors")
-                          ? "120 Educators"
-                          : composeAudience.includes("Admins")
-                          ? "5 Admins"
-                          : "1,540+ Platform Users"}
+                            ? "120 Educators"
+                            : composeAudience.includes("Admins")
+                              ? "5 Admins"
+                              : "1,540+ Platform Users"}
                       </span>
                     </div>
                     <div className="flex justify-between items-center">

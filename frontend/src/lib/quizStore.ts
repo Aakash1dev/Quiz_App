@@ -552,7 +552,7 @@ export const generateSmartQuestionsFromText = (customText = "", quizTitle = "Cus
 export const getQuestionsForQuiz = (quizId, quizTitle = "General Knowledge Quiz", questionCount = 10, customText = "") => {
   // Check if questions exist in localStorage
   try {
-    const customQuestionsRaw = localStorage.getItem(`eduvisio_questions_${quizId}`);
+    const customQuestionsRaw = localStorage.getItem(`Quizo_questions_${quizId}`);
     if (customQuestionsRaw) {
       const parsed = JSON.parse(customQuestionsRaw);
       if (Array.isArray(parsed) && parsed.length > 0) {
@@ -572,7 +572,7 @@ export const getQuestionsForQuiz = (quizId, quizTitle = "General Knowledge Quiz"
 };
 
 // LocalStorage Persistence Helpers
-const RESULTS_KEY = "eduvisio_quiz_results";
+const RESULTS_KEY = "Quizo_quiz_results";
 
 export const getSavedResults = () => {
   try {
@@ -597,13 +597,13 @@ export const saveQuizResult = (quizId, resultData) => {
     localStorage.setItem(RESULTS_KEY, JSON.stringify(updated));
 
     // Also update main user quiz attempt record
-    const userQuizzesRaw = localStorage.getItem("eduvisio_user_quizzes");
+    const userQuizzesRaw = localStorage.getItem("Quizo_user_quizzes");
     let userQuizzes = userQuizzesRaw ? JSON.parse(userQuizzesRaw) : [];
     const index = userQuizzes.findIndex(q => q.id === quizId);
     if (index !== -1) {
       userQuizzes[index].completionPercentage = 100;
       userQuizzes[index].score = resultData.score;
-      localStorage.setItem("eduvisio_user_quizzes", JSON.stringify(userQuizzes));
+      localStorage.setItem("Quizo_user_quizzes", JSON.stringify(userQuizzes));
     }
     return updated;
   } catch (e) {
@@ -613,14 +613,14 @@ export const saveQuizResult = (quizId, resultData) => {
 
 export const saveGeneratedQuiz = (quizMeta, questions) => {
   try {
-    // Save metadata into eduvisio_user_quizzes
-    const userQuizzesRaw = localStorage.getItem("eduvisio_user_quizzes");
+    // Save metadata into Quizo_user_quizzes
+    const userQuizzesRaw = localStorage.getItem("Quizo_user_quizzes");
     let userQuizzes = userQuizzesRaw ? JSON.parse(userQuizzesRaw) : [];
     userQuizzes = [quizMeta, ...userQuizzes.filter(q => q.id !== quizMeta.id)];
-    localStorage.setItem("eduvisio_user_quizzes", JSON.stringify(userQuizzes));
+    localStorage.setItem("Quizo_user_quizzes", JSON.stringify(userQuizzes));
 
-    // Save questions into eduvisio_questions_{id}
-    localStorage.setItem(`eduvisio_questions_${quizMeta.id}`, JSON.stringify(questions));
+    // Save questions into Quizo_questions_{id}
+    localStorage.setItem(`Quizo_questions_${quizMeta.id}`, JSON.stringify(questions));
     return quizMeta;
   } catch (e) {
     console.error("Failed to save generated quiz", e);

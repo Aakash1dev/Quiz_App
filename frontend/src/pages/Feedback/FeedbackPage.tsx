@@ -51,7 +51,7 @@ export const FeedbackPage = () => {
     setRating(5);
     toast({
       title: "🌟 Thank You for Your Feedback!",
-      description: "Your review has been submitted to the EduVisio team.",
+      description: "Your review has been submitted to the Quizo team.",
     });
   };
 
@@ -96,7 +96,7 @@ export const FeedbackPage = () => {
         <TabsContent value="submit">
           <Card className="border-slate-200 max-w-2xl">
             <CardHeader>
-              <CardTitle className="text-base font-bold text-slate-900">Rate Your Experience with EduVisio</CardTitle>
+              <CardTitle className="text-base font-bold text-slate-900">Rate Your Experience with Quizo</CardTitle>
               <CardDescription className="text-xs">Your insights help us continuously improve our AI tools.</CardDescription>
             </CardHeader>
             <CardContent>
@@ -112,9 +112,8 @@ export const FeedbackPage = () => {
                         className="p-1 text-amber-400 hover:scale-110 transition-transform"
                       >
                         <Star
-                          className={`h-7 w-7 ${
-                            star <= rating ? "fill-amber-400 text-amber-400" : "text-slate-300"
-                          }`}
+                          className={`h-7 w-7 ${star <= rating ? "fill-amber-400 text-amber-400" : "text-slate-300"
+                            }`}
                         />
                       </button>
                     ))}
@@ -174,9 +173,8 @@ export const FeedbackPage = () => {
                       {[1, 2, 3, 4, 5].map((s) => (
                         <Star
                           key={s}
-                          className={`h-4 w-4 ${
-                            s <= item.rating ? "fill-amber-400 text-amber-400" : "text-slate-300"
-                          }`}
+                          className={`h-4 w-4 ${s <= item.rating ? "fill-amber-400 text-amber-400" : "text-slate-300"
+                            }`}
                         />
                       ))}
                     </div>
@@ -188,7 +186,7 @@ export const FeedbackPage = () => {
 
                   {item.response && (
                     <div className="p-3 bg-purple-50 rounded-xl border border-purple-100">
-                      <p className="font-semibold text-purple-900 text-[11px] mb-1">🛡️ EduVisio Admin Response:</p>
+                      <p className="font-semibold text-purple-900 text-[11px] mb-1">🛡️ Quizo Admin Response:</p>
                       <p className="text-purple-800">{item.response}</p>
                     </div>
                   )}

@@ -1,15 +1,15 @@
 // Central Admin & Platform Data Store with LocalStorage Persistence
 
 const KEYS = {
-  CATEGORIES: "eduvisio_admin_categories",
-  USERS: "eduvisio_admin_users",
-  FAQS: "eduvisio_admin_faqs",
-  PLANS: "eduvisio_admin_plans",
-  FEEDBACK: "eduvisio_admin_feedback",
-  TICKETS: "eduvisio_admin_tickets",
-  SETTINGS: "eduvisio_admin_settings",
-  NOTIFICATIONS: "eduvisio_admin_notifications",
-  NOTIF_SETTINGS: "eduvisio_admin_notif_settings",
+  CATEGORIES: "Quizo_admin_categories",
+  USERS: "Quizo_admin_users",
+  FAQS: "Quizo_admin_faqs",
+  PLANS: "Quizo_admin_plans",
+  FEEDBACK: "Quizo_admin_feedback",
+  TICKETS: "Quizo_admin_tickets",
+  SETTINGS: "Quizo_admin_settings",
+  NOTIFICATIONS: "Quizo_admin_notifications",
+  NOTIF_SETTINGS: "Quizo_admin_notif_settings",
 };
 
 // 1. SUPPORT TICKET CATEGORIES
@@ -59,11 +59,11 @@ export const deleteSupportCategory = (categoryName) => {
 
 // 2. ADMIN USERS MANAGEMENT
 const DEFAULT_USERS = [
-  { id: "u1", name: "Aakash Sharma", email: "admin@eduvisio.com", role: "admin", tier: "Elite Scholar", status: "active", quizzesCount: 42, joinedDate: "2026-01-10", lastLogin: "Just now", location: "New Delhi, India", phone: "+91 98765 43210" },
+  { id: "u1", name: "Aakash Sharma", email: "admin@Quizo.com", role: "admin", tier: "Elite Scholar", status: "active", quizzesCount: 42, joinedDate: "2026-01-10", lastLogin: "Just now", location: "New Delhi, India", phone: "+91 98765 43210" },
   { id: "u2", name: "Rohan Verma", email: "rohan@gmail.com", role: "user", tier: "Pro Student", status: "active", quizzesCount: 19, joinedDate: "2026-02-14", lastLogin: "2 hours ago", location: "Mumbai, India", phone: "+91 98123 45678" },
   { id: "u3", name: "Priya Patel", email: "priya@student.edu", role: "user", tier: "Pro Student", status: "active", quizzesCount: 28, joinedDate: "2026-03-01", lastLogin: "Yesterday", location: "Ahmedabad, India", phone: "+91 97234 56789" },
   { id: "u4", name: "David Miller", email: "david@university.edu", role: "user", tier: "Free Learner", status: "active", quizzesCount: 14, joinedDate: "2026-04-12", lastLogin: "3 days ago", location: "California, USA", phone: "+1 415 555 0192" },
-  { id: "u5", name: "Guest User", email: "user@eduvisio.com", role: "user", tier: "Free Learner", status: "active", quizzesCount: 5, joinedDate: "2026-08-01", lastLogin: "Just now", location: "London, UK", phone: "+44 20 7946 0912" },
+  { id: "u5", name: "Guest User", email: "user@Quizo.com", role: "user", tier: "Free Learner", status: "active", quizzesCount: 5, joinedDate: "2026-08-01", lastLogin: "Just now", location: "London, UK", phone: "+44 20 7946 0912" },
 ];
 
 export const getAdminUsers = () => {
@@ -368,19 +368,19 @@ export const THEMES = {
 };
 
 export const getUserTheme = () => {
-  return localStorage.getItem("eduvisio_user_theme") || "green";
+  return localStorage.getItem("Quizo_user_theme") || "green";
 };
 
 export const setUserTheme = (themeKey) => {
-  localStorage.setItem("eduvisio_user_theme", themeKey);
+  localStorage.setItem("Quizo_user_theme", themeKey);
 };
 
 export const getAdminTheme = () => {
-  return localStorage.getItem("eduvisio_admin_theme") || "orange";
+  return localStorage.getItem("Quizo_admin_theme") || "orange";
 };
 
 export const setAdminTheme = (themeKey) => {
-  localStorage.setItem("eduvisio_admin_theme", themeKey);
+  localStorage.setItem("Quizo_admin_theme", themeKey);
 };
 
 // 8. ADMIN NOTIFICATIONS MANAGEMENT
@@ -401,7 +401,7 @@ export const DEFAULT_NOTIFICATIONS = [
     actionLink: "/generate-quiz",
     isRead: false,
     pinned: true,
-    sender: "EduVisio System Ops",
+    sender: "Quizo System Ops",
   },
   {
     id: "notif-2",
@@ -461,7 +461,7 @@ export const DEFAULT_NOTIFICATIONS = [
   {
     id: "notif-5",
     title: "🛡️ Security Flag: Repeated Authentication Failures",
-    message: "5 consecutive failed login attempts detected on administrative account 'admin@eduvisio.com' from IP 192.168.1.104. Temporary rate limit enforced.",
+    message: "5 consecutive failed login attempts detected on administrative account 'admin@Quizo.com' from IP 192.168.1.104. Temporary rate limit enforced.",
     type: "security",
     priority: "urgent",
     targetAudience: "Super Admins",

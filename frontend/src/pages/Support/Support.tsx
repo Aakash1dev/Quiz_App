@@ -78,7 +78,7 @@ export const Support = () => {
 
     const newTicket = {
       id: `TICK-${Math.floor(100 + Math.random() * 900)}`,
-      user: `${parsedUser?.name || "User"} (${parsedUser?.email || "user@eduvisio.com"})`,
+      user: `${parsedUser?.name || "User"} (${parsedUser?.email || "user@Quizo.com"})`,
       subject: subject.trim(),
       category,
       priority,
@@ -178,8 +178,8 @@ export const Support = () => {
                               ticket.status === "Open"
                                 ? "bg-amber-500 text-white"
                                 : ticket.status === "In Progress"
-                                ? "bg-blue-600 text-white"
-                                : "bg-emerald-600 text-white"
+                                  ? "bg-blue-600 text-white"
+                                  : "bg-emerald-600 text-white"
                             }
                           >
                             {ticket.status}
@@ -216,11 +216,10 @@ export const Support = () => {
                     {ticket.messages.map((m, i) => (
                       <div
                         key={i}
-                        className={`p-3 rounded-xl max-w-xl ${
-                          m.sender === "admin"
+                        className={`p-3 rounded-xl max-w-xl ${m.sender === "admin"
                             ? "bg-blue-50 border border-blue-100 ml-auto"
                             : "bg-slate-100 border border-slate-200"
-                        }`}
+                          }`}
                       >
                         <p className="font-semibold text-slate-800 text-[11px] mb-1">
                           {m.sender === "admin" ? "🛡️ Support Representative" : "🎓 User Message"}
@@ -267,8 +266,8 @@ export const Support = () => {
                         ticket.status === "Open"
                           ? "bg-amber-500 text-white"
                           : ticket.status === "In Progress"
-                          ? "bg-blue-600 text-white"
-                          : "bg-emerald-600 text-white"
+                            ? "bg-blue-600 text-white"
+                            : "bg-emerald-600 text-white"
                       }
                     >
                       {ticket.status}
@@ -279,11 +278,10 @@ export const Support = () => {
                   {ticket.messages.map((m, i) => (
                     <div
                       key={i}
-                      className={`p-3 rounded-xl ${
-                        m.sender === "admin"
+                      className={`p-3 rounded-xl ${m.sender === "admin"
                           ? "bg-blue-50 border border-blue-100"
                           : "bg-slate-100 border border-slate-200"
-                      }`}
+                        }`}
                     >
                       <p className="font-semibold text-slate-800 text-[11px] mb-1">
                         {m.sender === "admin" ? "🛡️ Support Response" : "You"}
